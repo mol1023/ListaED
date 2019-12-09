@@ -1,0 +1,97 @@
+typedef struct no
+{
+    int reg;
+    struct no* prox;
+    struct no* ant;
+}no;
+
+typedef struct Deque{
+    int qtd;
+    struct no* fim;
+    struct no* inicio;
+}Deque;
+
+Deque *criaDeque(){
+    Deque *dq = (Deque*)malloc(sizeof(Deque));
+    dq->qtd = 0;
+    dq->inicio = NULL;
+    dq->fim = NULL;
+}
+
+void insereInicio(Deque *dq, int x){
+    no *novo = (*no)malloc(sizeof(no));
+    novo->prox = dq->inicio;
+    novo->ant = NULL;
+    if(dq->inicio != NULL){
+        dq->inicio->ant = novo;
+        dq->inicio = novo;
+        dq->qtd++;
+    }
+    else{
+        dq->fim = novo;
+        dq->inicio = novo;
+        dq->qtd++;
+    }
+    return;
+}
+
+void insereFim(Deque *dq, int x){
+    no *novo = (no*)malloc(sizeof(no));
+    novo->prox = NULL;
+    novo->ant = dq->fim;
+    if(dq->fim != NULL){
+        dq->fim->prox = novo;
+        dq->fim = novo;
+    }
+    else{
+        dq->inicio = novo;
+        dq->fim = novo;
+    }
+    dq->qtd++;
+    return;
+}
+
+void removeInicio(Deque *dq){
+    no *aux;
+    aux = dq->inicio;
+
+    if(dq->inicio = NULL)
+        return;
+    
+    if(dq->inicio == dq->fim){
+        dq->inicio = NULL;
+        dq->fim = NULL;
+        return;
+    }
+
+    dq->inicio->prox->ant = NULL;
+    dq->inicio = dq->inicio->prox;
+    
+    if(dq->inicio = NULL)
+        dq->fim = NULL;
+    
+    free(aux);
+    dq->qtd--;
+}
+
+void removeFim(Deque *dq){
+    no *aux;
+    aux = dq->fim;
+
+    if(dq->inicio = NULL)
+        return;
+    
+    if(dq->inicio == dq->fim){
+        dq->inicio = NULL;
+        dq->fim = NULL;
+        free(aux);
+        dq->qtd--;
+        return;
+    }
+
+    dq->fim->ant->prox = NULL;
+    dq->fim = dq->fim->ant;
+    free(aux);
+    dq->qtd--;
+    return;
+}
