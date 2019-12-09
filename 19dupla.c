@@ -18,6 +18,10 @@ Deque *criaDeque(){
     dq->fim = NULL;
 }
 
+int Dequevazio(Deque *dq){
+    return dq->inicio == NULL;
+}
+    
 void insereInicio(Deque *dq, int x){
     no *novo = (*no)malloc(sizeof(no));
     novo->prox = dq->inicio;
